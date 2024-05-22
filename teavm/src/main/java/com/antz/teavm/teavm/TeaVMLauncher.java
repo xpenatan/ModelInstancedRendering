@@ -1,6 +1,7 @@
 package com.antz.teavm.teavm;
 
 import com.antz.instanced.ModelInstancedRendering;
+import com.antz.instanced.imgui.ImGuiImpl;
 import com.github.xpenatan.gdx.backends.teavm.TeaApplicationConfiguration;
 import com.github.xpenatan.gdx.backends.teavm.TeaApplication;
 
@@ -19,7 +20,6 @@ public class TeaVMLauncher {
         config.width = 0;
         config.height = 0;
         config.useGL30 = true;
-        config.useGLArrayBuffer = true; // current hack for floatbuffer being slow
-        new TeaApplication(new ModelInstancedRendering(), config);
+        new TeaApplication(new ModelInstancedRendering(new ImGuiImpl()), config);
     }
 }

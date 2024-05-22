@@ -1,0 +1,8 @@
+sourceCompatibility = 11
+
+dependencies {
+  implementation("com.github.xpenatan.gdx-imgui:imgui-ext-core:$gdxImGuiVersion")
+  implementation("com.github.xpenatan.gdx-imgui:gdx-impl:$gdxImGuiVersion")
+
+  implementation project(':core')
+}

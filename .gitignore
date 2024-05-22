@@ -8,11 +8,15 @@ gradle-app.setting
 /lwjgl3/build/
 /html/build/
 /teavm/build/
+
 /ios/build/
 /ios-moe/build/
 /headless/build/
 /server/build/
 /shared/build/
+/imgui-base/build/
+
+imgui.ini
 
 ## Java:
 *.class

@@ -25,7 +25,11 @@ sourceCompatibility = 11
 dependencies {
   implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
   implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+  implementation("com.github.xpenatan.gdx-imgui:imgui-ext-desktop:$gdxImGuiVersion")
+
   implementation project(':core')
+  implementation project(':imgui-base')
 }
 
 def os = System.properties['os.name'].toLowerCase()

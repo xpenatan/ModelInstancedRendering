@@ -31,6 +31,7 @@ import com.antz.instanced.shader.MyPBRShaderProvider;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Cubemap;
@@ -81,11 +82,11 @@ public class ModelInstancedRenderingPBRScreen implements Screen {
     private int INSTANCE_COUNT_SIDE;
     private int INSTANCE_COUNT;
     private final float INSTANCE_SEPARATION_FACTOR = 9.0f;
-    private static float CULLING_FACTOR;
+    public static float CULLING_FACTOR;
 
     private SpriteBatch batch2D;
     private BitmapFont font;
-    private PerspectiveCamera camera;
+    public PerspectiveCamera camera;
     private FirstPersonCameraController controller;
     private Matrix4 mat4;
     private Vector3 vec3Temp;
@@ -100,6 +101,12 @@ public class ModelInstancedRenderingPBRScreen implements Screen {
     private final StringBuffer stringBuffer = new StringBuffer();
     private float size;
     private boolean rotateOn = false, showStats = true;
+
+    private ImGuiInterface imGuiInterface;
+
+    public ModelInstancedRenderingPBRScreen(ImGuiInterface imGuiInterface) {
+        this.imGuiInterface = imGuiInterface;
+    }
 
     @Override
     public void show() {
@@ -134,6 +141,10 @@ public class ModelInstancedRenderingPBRScreen implements Screen {
             drawStats();
             batch2D.end();
         }
+
+        imGuiInterface.begin();
+        imGuiInterface.render(this);
+        imGuiInterface.end();
     }
 
     private void update(float delta) {
@@ -357,7 +368,7 @@ public class ModelInstancedRenderingPBRScreen implements Screen {
         camera.position.set(
             INSTANCE_COUNT_SIDE * INSTANCE_SEPARATION_FACTOR * size/2f,
             INSTANCE_COUNT_SIDE * INSTANCE_SEPARATION_FACTOR * size/2f,
-            INSTANCE_COUNT_SIDE * INSTANCE_SEPARATION_FACTOR * size/2f);
+            -300);
 
         camera.direction.set(Vector3.Z);
         camera.up.set(Vector3.Y);
@@ -377,7 +388,11 @@ public class ModelInstancedRenderingPBRScreen implements Screen {
         controller = new FirstPersonCameraController(camera);
         controller.setVelocity(size*16); // you can change the speed
         controller.setDegreesPerPixel(0.2f);
-        Gdx.input.setInputProcessor(controller);
+
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        imGuiInterface.setup(inputMultiplexer);
+        inputMultiplexer.addProcessor(controller);
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override

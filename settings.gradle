@@ -1,1 +1,1 @@
-include 'ios', 'core', 'android', 'html', 'lwjgl3', 'teavm'
+include 'ios', 'core', 'android', 'html', 'lwjgl3', 'teavm', 'imgui-base'

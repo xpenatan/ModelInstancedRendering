@@ -20,7 +20,9 @@ sourceCompatibility = 11
 
 dependencies {
   implementation "com.github.xpenatan.gdx-teavm:backend-teavm:$gdxTeaVMVersion"
+  implementation("com.github.xpenatan.gdx-imgui:imgui-ext-teavm:$gdxImGuiVersion")
   implementation project(':core')
+  implementation project(':imgui-base')
 
 }
 
